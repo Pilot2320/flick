@@ -1,58 +1,193 @@
-/* БАЗА: читаемость и предсказуемость размеров */
+/* ===== TOKENS ===== */
+:root {
+    /* Палитра */
+    --color-bg: #fff;
+    --color-fg: #0b0b0b;
+    --color-muted: #666;
+    --color-primary: #0a84ff;
+    --color-danger: #b00020;
+
+    /* Типографика */
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    
+    /* Размеры */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 40px;
+    
+    /* Декоративные */
+    --radius: 12px;
+    --shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* ===== BASE/RESET ===== */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
-
-/* Стили для модального окна */
-dialog {
-  padding: 1.25rem;
-  border: none;
-  border-radius: 12px;
-  width: min(92vw, 520px);
-}
-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    padding: var(--space-3);
 }
 
-/* Стили для форм */
-label {
-  display: block;
-  margin: 0.5rem 0 0.25rem;
+/* ===== COMPONENTS ===== */
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-muted);
+    margin-bottom: var(--space-5);
 }
-input,
-select,
-textarea,
-button {
-  width: 100%;
-  max-width: 480px;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #c8c8c8;
-  border-radius: 8px;
-  background: #fff;
-  margin-bottom: 0.5rem;
+
+.header__brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--color-fg);
 }
-button,
-[type="submit"] {
-  background: #0a84ff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 0.75rem 1rem;
+
+/* Navigation */
+.nav__list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
 }
+
+.nav__link {
+    text-decoration: none;
+    color: var(--color-muted);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+.nav__link:hover {
+    color: var(--color-fg);
+    background: rgba(0,0,0,0.05);
+}
+
+.nav__link--cta {
+    background: var(--color-primary);
+    color: white !important;
+}
+
+.nav__link--cta:hover {
+    background: #0066cc;
+}
+
+/* Sections */
+.section {
+    padding: var(--space-5) 0;
+}
+
+/* Modal */
+.modal {
+    padding: var(--space-4);
+    border: none;
+    border-radius: var(--radius);
+    width: min(92vw, 520px);
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.form label {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-weight: 500;
+}
+
+.form input,
+.form select,
+.form textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-muted);
+    border-radius: var(--radius);
+    font: inherit;
+}
+
 .form-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
 }
 
-/* Состояния: доступность и ошибки */
-:where(input, select, textarea, button):focus-visible {
-  outline: 2px solid #0a84ff;
-  outline-offset: 2px;
+/* ===== STATES ===== */
+:where(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
+
 button:hover {
-  filter: brightness(0.95);
+    filter: brightness(0.95);
 }
+
+:disabled, [aria-disabled="true"] {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
 [aria-invalid="true"] {
-  border-color: #b00020;
+    border-color: var(--color-danger);
+}
+
+/* ===== UTILITIES ===== */
+.container {
+    width: min(100% - 2 * var(--space-4), 1120px);
+    margin-inline: auto;
+}
+.media {
+    aspect-ratio: 16/9;
+    width: min(100%, 800px);
+    margin: var(--space-4) 0;
+}
+
+.media video {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+}
+html {
+    scroll-behavior: smooth;
+}
+.hero {
+    background: 
+        linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3)),
+        url("assets/hero-bg.jpg") center/cover no-repeat;
+    color: white;
+    padding: var(--space-5);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-5);
+    text-align: center;
+}
+
+.hero__content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero__button {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius);
+    text-decoration: none;
+    margin-top: var(--space-3);
 }
