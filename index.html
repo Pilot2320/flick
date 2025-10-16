@@ -1,107 +1,1306 @@
- <!DOCTYPE html> 
-<html lang="ru"> 
-<head> 
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Главная - Название вашего сайта</title> 
-    <meta name="description" content="Краткое описание главной страницы вашего сайта"> 
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> 
-</head> 
-<body> 
-    <!-- Шапка сайта --> 
-    <header class="header">
-        <a class="header__brand" href="/">Логотип или название сайта</a>
-        <nav class="nav" aria-label="Основная навигация">
-            <ul class="nav__list">
-                <li class="nav__item"><a class="nav__link" href="index.html">Главная</a></li>
-                <li class="nav__item"><a class="nav__link" href="about.html">О нас</a></li>
-                <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
-                <li class="nav__item"><a class="nav__link nav__link--cta" href="#contacts">Связаться с нами</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Уникальное основное содержимое страницы --> 
-    <main>
-        <section class="hero">
-            <div class="hero__content">
-                <h1>Добро пожаловать на наш сайт!</h1>
-                <p>Мы создаем innovative решения для вашего бизнеса</p>
-                <a href="#contacts" class="hero__button">Начать сотрудничество</a>
-            </div>
-        </section> 
-        <!-- Секция 1 с якорем --> 
-        <section id="services" class="section">
-            <h2>Наши услуги</h2>
-            <p>Описание предоставляемых услуг...</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowthPath - Курсы личностного роста</title>
+    <!-- Подключение Bootstrap CSS для стилизации -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключение иконок Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Подключение шрифта Inter от Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-            <div class="media">
-                <video controls width="800" height="450" style="border-radius: var(--radius);">
-                    <source src="assets/video.mp4" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
+    <style>
+        /* ===== ПЕРЕМЕННЫЕ CSS ===== */
+        /* Определяем цветовую палитру и основные параметры дизайна */
+        :root {
+            /* Основные цвета */
+            --primary-color: #6366F1;      /* Основной цвет - индиго */
+            --primary-light: #8B5CF6;      /* Светлый вариант основного */
+            --secondary-color: #10B981;    /* Вторичный цвет - зеленый */
+            --accent-color: #F59E0B;       /* Акцентный цвет - янтарный */
+            
+            /* Фоновые цвета */
+            --bg-light: #F8FAFC;          /* Светлый фон */
+            --bg-white: #FFFFFF;          /* Белый фон */
+            
+            /* Цвета текста */
+            --text-primary: #1F2937;      /* Основной текст */
+            --text-secondary: #6B7280;    /* Вторичный текст */
+            --border-color: #E5E7EB;      /* Цвет границ */
+            
+            /* Градиенты */
+            --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            --gradient-secondary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            
+            /* Тени */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        
+        /* ===== ОБЩИЕ СТИЛИ ===== */
+        /* Применяем шрифт Inter ко всем элементам */
+        * {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        /* Стили для body */
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* ===== СТИЛИ HERO СЕКЦИИ ===== */
+        /* Главная секция с градиентным фоном */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            min-height: 100vh;              /* Минимальная высота экрана */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Декоративная сетка на фоне hero секции */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* SVG паттерн для создания декоративной сетки */
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            pointer-events: none;
+        }
+        
+        /* ===== СТИЛИ НАВИГАЦИИ ===== */
+        /* Фиксированная навигационная панель */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);    /* Полупрозрачный фон */
+            backdrop-filter: blur(20px);              /* Размытие фона */
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+        
+        /* Стили для логотипа */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        /* Стили для ссылок навигации */
+        .nav-link-custom {
+            font-weight: 500;
+            color: var(--text-primary) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;          /* Плавные переходы */
+        }
+        
+        /* Эффект при наведении на ссылки навигации */
+        .nav-link-custom:hover {
+            background: var(--bg-light);
+            color: var(--primary-color) !important;
+        }
+        
+        /* ===== СТИЛИ КНОПОК ===== */
+        /* Основная кнопка с градиентом */
+        .btn-primary-custom {
+            background: var(--gradient-primary);
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;               /* Полностью скругленные углы */
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        /* Эффект при наведении на основную кнопку */
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);       /* Поднимаем кнопку */
+            box-shadow: var(--shadow-lg);      /* Увеличиваем тень */
+            background: var(--gradient-primary);
+            border: none;
+        }
+        
+        /* Кнопка с контуром */
+        .btn-outline-custom {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        /* Эффект при наведении на кнопку с контуром */
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-color);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* ===== СТИЛИ КОНТЕНТА HERO СЕКЦИИ ===== */
+        .hero-content {
+            position: relative;
+            z-index: 2;                        /* Поднимаем над декоративными элементами */
+            padding: 8rem 0 4rem;
+        }
+        
+        /* Заголовок hero секции */
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        /* Подзаголовок hero секции */
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+        
+        /* ===== СТИЛИ СТАТИСТИЧЕСКИХ КАРТОЧЕК ===== */
+        /* Карточки со статистикой */
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);      /* Полупрозрачный фон */
+            backdrop-filter: blur(20px);               /* Эффект матового стекла */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        /* Эффект при наведении на статистические карточки */
+        .stats-card:hover {
+            transform: translateY(-5px);               /* Поднимаем карточку */
+            background: rgba(255, 255, 255, 0.15);     /* Делаем фон ярче */
+        }
+        
+        /* Числа в статистических карточках */
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== СТИЛИ СЕКЦИЙ ===== */
+        /* Заголовки секций */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        /* Подзаголовки секций */
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ===== СТИЛИ КАРТОЧЕК КУРСОВ ===== */
+        /* Основные стили карточек курсов */
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+        
+        /* Эффект при наведении на карточки курсов */
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Изображения курсов с градиентными фонами */
+        .course-image {
+            height: 220px;
+            background: var(--gradient-primary);    /* Градиент по умолчанию */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Вторичный градиент для курсов */
+        .course-image.secondary {
+            background: var(--gradient-secondary);
+        }
+        
+        /* Акцентный градиент для курсов */
+        .course-image.accent {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #EF4444 100%);
+        }
+        
+        /* Цены курсов */
+        .course-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);           /* Эффект размытия */
+        }
+        
+        /* Уровень сложности курса */
+        .course-level {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Контент карточек курсов */
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        /* Заголовки курсов */
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+        
+        /* Описания курсов */
+        .course-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        /* Мета-информация курсов */
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ===== СТИЛИ СЕКЦИИ ПРЕИМУЩЕСТВ ===== */
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* Иконки преимуществ */
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        /* Вторичный стиль для иконок */
+        .feature-icon.secondary {
+            background: var(--gradient-secondary);
+        }
+        
+        /* Акцентный стиль для иконок */
+        .feature-icon.accent {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #EF4444 100%);
+        }
+        
+        /* ===== СТИЛИ ОТЗЫВОВ ===== */
+        /* Карточки отзывов */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border: none;
+            height: 100%;
+        }
+        
+        /* Аватары пользователей */
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;                /* Делаем круглыми */
+            background: var(--gradient-primary);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Текст отзывов */
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Авторы отзывов */
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* ===== СТИЛИ CTA СЕКЦИИ ===== */
+        /* Призыв к действию */
+        .cta-section {
+            background: var(--gradient-primary);
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+        }
+        
+        /* ===== СТИЛИ ФУТЕРА ===== */
+        .footer-custom {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+        
+        /* Ссылки в футере */
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        /* Эффект при наведении на ссылки футера */
+        .footer-link:hover {
+            color: white;
+        }
+        
+        /* ===== СТИЛИ МОДАЛЬНЫХ ОКОН ===== */
+        /* Контент модальных окон */
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Заголовки модальных окон */
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+            border: none;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        /* Кнопка закрытия модального окна */
+        .btn-close {
+            filter: brightness(0) invert(1);      /* Делаем белой */
+            opacity: 0.8;
+        }
+        
+        .btn-close:hover {
+            opacity: 1;
+        }
+        
+        /* Тело модального окна */
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        /* Пользовательские поля ввода */
+        .form-control-custom {
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            margin-bottom: 1rem;
+        }
+        
+        /* Фокус на полях ввода */
+        .form-control-custom:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+            outline: none;
+        }
+        
+        /* Стили для лейблов форм */
+        .form-label-custom {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Подвал модального окна */
+        .modal-footer {
+            border: none;
+            padding: 0 2rem 2rem;
+        }
+        
+        /* Стили для модального окна входа */
+        .login-modal .modal-header {
+            background: var(--gradient-secondary);    /* Зеленый градиент */
+        }
+        
+        /* Группы полей ввода */
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Иконки в полях ввода */
+        .input-group-custom i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            z-index: 5;
+        }
+        
+        /* Отступ для текста в полях с иконками */
+        .input-group-custom input {
+            padding-left: 3rem;
+        }
+        
+        /* ===== АДАПТИВНЫЕ СТИЛИ ===== */
+        /* Стили для мобильных устройств */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;            /* Уменьшаем размер заголовка */
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;            /* Уменьшаем размер подзаголовка */
+            }
+            
+            .section-title {
+                font-size: 2rem;              /* Уменьшаем размер заголовков секций */
+            }
+            
+            .hero-content {
+                padding: 4rem 0 2rem;         /* Уменьшаем отступы */
+            }
+        }
+        
+        /* ===== АНИМИРОВАННЫЕ ЭЛЕМЕНТЫ ===== */
+        /* Контейнер для плавающих элементов */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        /* Декоративные плавающие элементы */
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-elements::before {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 15%;
+            width: 150px;
+            height: 150px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(45deg);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        /* Анимация плавания */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== НАВИГАЦИОННАЯ ПАНЕЛЬ ===== -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container">
+            <!-- Логотип и название сайта -->
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-graph-up-arrow me-2"></i>GrowthPath
+            </a>
+            
+            <!-- Кнопка мобильного меню -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Содержимое навигации -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Основное меню БЕЗ вкладки "Мой прогресс" -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <!-- Переход на отдельную страницу курсов -->
+                        <a class="nav-link nav-link-custom" href="courses.html">Курсы</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Скролл к секции "О нас" на этой же странице -->
+                        <a class="nav-link nav-link-custom" href="#about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Скролл к секции отзывов -->
+                        <a class="nav-link nav-link-custom" href="#testimonials">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Переход на страницу контактов -->
+                        <a class="nav-link nav-link-custom" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+                
+                <!-- Кнопки входа и регистрации -->
+                <div class="d-flex gap-2">
+                    <!-- Кнопка открытия модального окна входа -->
+                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</button>
+                    <!-- Кнопка прокрутки к курсам -->
+                    <button class="btn btn-primary-custom btn-sm" onclick="scrollToCourses()">Начать обучение</button>
+                </div>
             </div>
-    
-            <a href="#contacts">Связаться с нами</a>
-        </section> 
-        <!-- Секция 2 с якорем --> 
-        <section id="portfolio" class="section">
-            <h2>Портфолио</h2>
-            <p>Примеры наших работ...</p>
-            <img src="assets/portfolio.jpg" 
-                alt="Пример нашей работы" 
-                width="800" 
-                height="450"
-                loading="lazy"
-                style="border-radius: var(--radius); margin-top: var(--space-3);">
-        </section> 
-        <!-- Секция 3 с якорем --> 
-        <section id="contacts" class="section"> 
-            <h2>Контактная информация</h2> 
-            <p>Наши контакты...</p> 
-            <!-- Кнопка открытия модалки -->
-<button id="openDialog" type="button">Написать нам</button>
-    </main> 
-            <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу --> 
-        </section> 
-    <!-- Подвал сайта --> 
-    <footer> 
-        <p>&copy; 2023 Название вашего сайта. Все права защищены.</p> 
-        <p>Телефон: +7 (123) 456-78-90</p> 
-    </footer> 
-    <!-- Модалка с формой -->
-<dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
-    <h2 id="dialogTitle">Обратная связь</h2>
-    <form id="contactForm" class="form" method="dialog" novalidate>
-        <label for="name">Имя</label>
-        <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
-
-        <label for="email">E-mail</label>
-        <input id="email" name="email" type="email" required autocomplete="email">
-
-        <label for="phone">Телефон</label>
-        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
-        <small id="phoneHelp">Формат: +7 (900) 000-00-00</small>
-
-        <label for="date">Дата</label>
-        <input id="date" name="date" type="date">
-
-        <label for="topic">Тема</label>
-        <select id="topic" name="topic" required>
-            <option value="">Выберите тему</option>
-            <option>Вопрос</option>
-            <option>Заказ</option>
-        </select>
-
-        <label for="message">Сообщение</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <div class="form-actions">
-            <button type="button" id="closeDialog">Закрыть</button>
-            <button type="submit">Отправить</button>
         </div>
-    </form>
-    </dialog>
-    <script src="main.js"></script>
-</body> 
-</html> 
+    </nav>
+
+    <!-- ===== ГЛАВНАЯ СЕКЦИЯ (HERO) ===== -->
+    <section class="hero-gradient">
+        <!-- Декоративные плавающие элементы -->
+        <div class="floating-elements"></div>
+        
+        <!-- Основной контент hero секции -->
+        <div class="hero-content">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Левая колонка с текстом -->
+                    <div class="col-lg-6">
+                        <h1 class="hero-title">Раскройте свой потенциал с нашими курсами</h1>
+                        <p class="hero-subtitle">Присоединяйтесь к тысячам людей, которые уже изменили свою жизнь благодаря нашим программам личностного роста и саморазвития</p>
+                        
+                        <!-- Кнопки призыва к действию -->
+                        <div class="d-flex gap-3 flex-wrap">
+                            <!-- Кнопка прокрутки к курсам -->
+                            <button class="btn btn-primary-custom" onclick="scrollToCourses()">Выбрать курс</button>
+                            <!-- Кнопка прокрутки к разделу "О нас" -->
+                            <a href="#about" class="btn btn-outline-custom">Узнать больше</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая колонка со статистикой -->
+                    <div class="col-lg-6">
+                        <div class="row g-4 mt-4 mt-lg-0">
+                            <!-- Карточки статистики -->
+                            <div class="col-4">
+                                <div class="stats-card">
+                                    <div class="stats-number">15K+</div>
+                                    <div>Студентов</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stats-card">
+                                    <div class="stats-number">50+</div>
+                                    <div>Курсов</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stats-card">
+                                    <div class="stats-number">98%</div>
+                                    <div>Довольных</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СЕКЦИЯ ПОПУЛЯРНЫХ КУРСОВ ===== -->
+    <section id="courses" class="py-5">
+        <div class="container">
+            <!-- Заголовок секции -->
+            <div class="text-center mb-5">
+                <h2 class="section-title">Популярные курсы</h2>
+                <p class="section-subtitle">Выберите направление, которое поможет вам достичь поставленных целей</p>
+            </div>
+            
+            <!-- Сетка с карточками курсов -->
+            <div class="row g-4">
+                <!-- Курс 1: Эмоциональный интеллект -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card course-card h-100">
+                        <!-- Изображение курса с градиентом -->
+                        <div class="course-image">
+                            <div class="course-price">₽12,990</div>
+                            <div class="course-level">Начинающий</div>
+                        </div>
+                        <!-- Контент курса -->
+                        <div class="course-content">
+                            <h5 class="course-title">Основы эмоционального интеллекта</h5>
+                            <p class="course-description">Научитесь понимать и управлять своими эмоциями, развивайте эмпатию и улучшайте отношения с окружающими</p>
+                            <!-- Мета-информация -->
+                            <div class="course-meta">
+                                <span><i class="bi bi-clock me-1"></i>8 недель</span>
+                                <span><i class="bi bi-people me-1"></i>2,340 студентов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Курс 2: Лидерство -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card course-card h-100">
+                        <!-- Вторичный градиент для изображения -->
+                        <div class="course-image secondary">
+                            <div class="course-price">₽15,990</div>
+                            <div class="course-level">Средний</div>
+                        </div>
+                        <div class="course-content">
+                            <h5 class="course-title">Лидерство и управление командой</h5>
+                            <p class="course-description">Развивайте лидерские качества, учитесь мотивировать команду и достигайте амбициозных целей</p>
+                            <div class="course-meta">
+                                <span><i class="bi bi-clock me-1"></i>10 недель</span>
+                                <span><i class="bi bi-people me-1"></i>1,850 студентов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Курс 3: Тайм-менеджмент -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card course-card h-100">
+                        <!-- Акцентный градиент для изображения -->
+                        <div class="course-image accent">
+                            <div class="course-price">₽9,990</div>
+                            <div class="course-level">Начинающий</div>
+                        </div>
+                        <div class="course-content">
+                            <h5 class="course-title">Управление временем и продуктивность</h5>
+                            <p class="course-description">Освойте современные методики планирования, избавьтесь от прокрастинации и повысьте эффективность</p>
+                            <div class="course-meta">
+                                <span><i class="bi bi-clock me-1"></i>6 недель</span>
+                                <span><i class="bi bi-people me-1"></i>3,720 студентов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кнопка для перехода к полному каталогу -->
+            <div class="text-center mt-5">
+                <a href="courses.html" class="btn btn-primary-custom">Посмотреть все курсы</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СЕКЦИЯ ПРЕИМУЩЕСТВ ===== -->
+    <section id="about" class="py-5 bg-white">
+        <div class="container">
+            <!-- Заголовок секции -->
+            <div class="text-center mb-5">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <p class="section-subtitle">Мы создали уникальную образовательную среду для вашего роста</p>
+            </div>
+            
+            <!-- Сетка с преимуществами -->
+            <div class="row g-5">
+                <!-- Преимущество 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <!-- Иконка преимущества -->
+                        <div class="feature-icon">
+                            <i class="bi bi-person-check-fill"></i>
+                        </div>
+                        <h5>Персональный подход</h5>
+                        <p class="text-muted">Индивидуальная программа обучения, адаптированная под ваши цели и особенности</p>
+                    </div>
+                </div>
+                
+                <!-- Преимущество 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <!-- Иконка с вторичным градиентом -->
+                        <div class="feature-icon secondary">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <h5>Сертифицированные эксперты</h5>
+                        <p class="text-muted">Преподаватели с международными сертификатами и многолетним опытом</p>
+                    </div>
+                </div>
+                
+                <!-- Преимущество 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <!-- Иконка с акцентным градиентом -->
+                        <div class="feature-icon accent">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h5>Сообщество единомышленников</h5>
+                        <p class="text-muted">Общение с людьми, которые тоже стремятся к личностному росту</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СЕКЦИЯ ОТЗЫВОВ ===== -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <!-- Заголовок секции -->
+            <div class="text-center mb-5">
+                <h2 class="section-title">Отзывы наших студентов</h2>
+                <p class="section-subtitle">Истории успеха тех, кто уже изменил свою жизнь</p>
+            </div>
+            
+            <!-- Сетка с отзывами -->
+            <div class="row g-4">
+                <!-- Отзыв 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card testimonial-card">
+                        <!-- Аватар пользователя с инициалами -->
+                        <div class="testimonial-avatar">АС</div>
+                        <p class="testimonial-text">"Курс по эмоциональному интеллекту кардинально изменил мои отношения в семье и на работе. Рекомендую всем!"</p>
+                        <div class="testimonial-author">Анна Смирнова</div>
+                        <small class="text-muted">Менеджер проектов</small>
+                    </div>
+                </div>
+                
+                <!-- Отзыв 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card testimonial-card">
+                        <div class="testimonial-avatar">МК</div>
+                        <p class="testimonial-text">"Благодаря курсу лидерства получил повышение и научился эффективно управлять командой из 15 человек."</p>
+                        <div class="testimonial-author">Михаил Козлов</div>
+                        <small class="text-muted">Руководитель отдела</small>
+                    </div>
+                </div>
+                
+                <!-- Отзыв 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card testimonial-card">
+                        <div class="testimonial-avatar">ЕВ</div>
+                        <p class="testimonial-text">"Наконец-то научилась планировать время! Успеваю гораздо больше и чувствую себя менее уставшей."</p>
+                        <div class="testimonial-author">Елена Васильева</div>
+                        <small class="text-muted">Предприниматель</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРИЗЫВ К ДЕЙСТВИЮ ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">Готовы начать свое путешествие к успеху?</h2>
+                    <p class="fs-5 mb-4 opacity-75">Присоединяйтесь к нашему сообществу и начните менять свою жизнь уже сегодня</p>
+                    
+                    <!-- Кнопки призыва к действию -->
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <!-- Кнопка прокрутки к курсам -->
+                        <button class="btn btn-light btn-lg" onclick="scrollToCourses()">Выбрать курс</button>
+                        <!-- Кнопка открытия модального окна консультации -->
+                        <button class="btn btn-outline-custom btn-lg" data-bs-toggle="modal" data-bs-target="#consultationModal">Бесплатная консультация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer-custom" id="contact">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Информация о компании -->
+                <div class="col-lg-4">
+                    <h5 class="mb-3"><i class="bi bi-graph-up-arrow me-2"></i>GrowthPath</h5>
+                    <p class="text-muted">Платформа для личностного роста и саморазвития. Помогаем людям раскрывать свой потенциал уже более 5 лет.</p>
+                    
+                    <!-- Социальные сети -->
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-link"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Курсы -->
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="mb-3">Курсы</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">Эмоциональный интеллект</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Лидерство</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Тайм-менеджмент</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Коммуникации</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Компания -->
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="mb-3">Компания</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">О нас</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Преподаватели</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Карьера</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Блог</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Контакты -->
+                <div class="col-lg-4">
+                    <h6 class="mb-3">Контакты</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@growthpath.ru</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+7 (495) 123-45-67</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Москва, ул. Тверская, 1</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Разделитель -->
+            <hr class="my-4 opacity-25">
+            
+            <!-- Копирайт и дополнительные ссылки -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">&copy; 2025 GrowthPath. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="footer-link me-3">Политика конфиденциальности</a>
+                    <a href="#" class="footer-link">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ВХОДА ===== -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-modal">
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">
+                        <i class="bi bi-person-circle me-2"></i>Вход в аккаунт
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <!-- Тело модального окна -->
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <p class="text-muted">Войдите в свой аккаунт, чтобы продолжить обучение</p>
+                    </div>
+                    
+                    <!-- Форма входа -->
+                    <form id="loginForm">
+                        <!-- Поле логина/email -->
+                        <div class="input-group-custom">
+                            <i class="bi bi-person-fill"></i>
+                            <input type="text" class="form-control form-control-custom" id="username" name="username" placeholder="Логин или email" required>
+                        </div>
+                        
+                        <!-- Поле пароля -->
+                        <div class="input-group-custom">
+                            <i class="bi bi-lock-fill"></i>
+                            <input type="password" class="form-control form-control-custom" id="password" name="password" placeholder="Пароль" required>
+                        </div>
+                        
+                        <!-- Дополнительные опции -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Запомнить меня
+                                </label>
+                            </div>
+                            <a href="#" class="text-decoration-none">Забыли пароль?</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Подвал модального окна -->
+                <div class="modal-footer">
+                    <div class="d-grid w-100 gap-2">
+                        <!-- Кнопка входа -->
+                        <button type="button" class="btn btn-primary-custom" onclick="performLogin()">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        </button>
+                        
+                        <!-- Ссылка на регистрацию -->
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Нет аккаунта? <a href="#" class="text-decoration-none">Зарегистрироваться</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО КОНСУЛЬТАЦИИ ===== -->
+    <div class="modal fade" id="consultationModal" tabindex="-1" aria-labelledby="consultationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Заголовок -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="consultationModalLabel">
+                        <i class="bi bi-headset me-2"></i>Бесплатная консультация
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <!-- Тело модального окна -->
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <p class="text-muted">Заполните форму ниже, и наш эксперт свяжется с вами для персональной консультации по выбору курса</p>
+                    </div>
+                    
+                    <!-- Форма консультации -->
+                    <form id="consultationForm">
+                        <div class="row g-3">
+                            <!-- Имя -->
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label form-label-custom">Имя *</label>
+                                <input type="text" class="form-control form-control-custom" id="firstName" name="firstName" required>
+                            </div>
+                            
+                            <!-- Фамилия -->
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label form-label-custom">Фамилия *</label>
+                                <input type="text" class="form-control form-control-custom" id="lastName" name="lastName" required>
+                            </div>
+                            
+                            <!-- Отчество -->
+                            <div class="col-12">
+                                <label for="middleName" class="form-label form-label-custom">Отчество</label>
+                                <input type="text" class="form-control form-control-custom" id="middleName" name="middleName">
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label for="email" class="form-label form-label-custom">Электронная почта *</label>
+                                <input type="email" class="form-control form-control-custom" id="email" name="email" required>
+                            </div>
+                            
+                            <!-- Телефон -->
+                            <div class="col-12">
+                                <label for="phone" class="form-label form-label-custom">Телефон</label>
+                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" placeholder="+7 (___) ___-__-__">
+                            </div>
+                            
+                            <!-- Область интересов -->
+                            <div class="col-12">
+                                <label for="interests" class="form-label form-label-custom">Какие темы вас интересуют?</label>
+                                <select class="form-control form-control-custom" id="interests" name="interests">
+                                    <option value="">Выберите область интересов</option>
+                                    <option value="emotional-intelligence">Эмоциональный интеллект</option>
+                                    <option value="leadership">Лидерство</option>
+                                    <option value="time-management">Тайм-менеджмент</option>
+                                    <option value="communication">Коммуникация</option>
+                                    <option value="mindfulness">Осознанность</option>
+                                    <option value="confidence">Уверенность в себе</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Дополнительные пожелания -->
+                            <div class="col-12">
+                                <label for="message" class="form-label form-label-custom">Дополнительные пожелания</label>
+                                <textarea class="form-control form-control-custom" id="message" name="message" rows="3" placeholder="Расскажите о ваших целях и ожиданиях от обучения"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Подвал модального окна -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary-custom" onclick="submitConsultation()">
+                        <i class="bi bi-send me-2"></i>Отправить заявку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО УСПЕХА ===== -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <!-- Иконка успеха -->
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <!-- Сообщение об успехе -->
+                    <h4 class="mb-3">Заявка отправлена!</h4>
+                    <p class="text-muted mb-4">
+                        Спасибо за ваш интерес к нашим курсам!<br>
+                        Дополнительная информация и детали консультации отправлены на указанную вами почту.
+                        <br><br>
+                        Наш эксперт свяжется с вами в течение 24 часов.
+                    </p>
+                    
+                    <!-- Кнопка закрытия -->
+                    <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Понятно</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ПОДКЛЮЧЕНИЕ JAVASCRIPT ===== -->
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Пользовательские скрипты -->
+    <script>
+        // ===== ФУНКЦИИ НАВИГАЦИИ =====
+        
+        /**
+         * Функция плавной прокрутки к секции курсов
+         * Вызывается при нажатии на кнопки "Выбрать курс" и "Начать обучение"
+         */
+        function scrollToCourses() {
+            const coursesSection = document.getElementById('courses');
+            if (coursesSection) {
+                coursesSection.scrollIntoView({
+                    behavior: 'smooth',    // Плавная прокрутка
+                    block: 'start'        // Прокручиваем к началу элемента
+                });
+            }
+        }
+
+        // ===== ФУНКЦИИ АУТЕНТИФИКАЦИИ =====
+        
+        /**
+         * Обработка входа пользователя в систему
+         * Валидирует поля и показывает результат
+         */
+        function performLogin() {
+            // Получаем значения из полей формы
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            // Простая валидация полей
+            if (!username || !password) {
+                alert('Пожалуйста, введите логин и пароль');
+                return;
+            }
+            
+            // Здесь в реальном приложении был бы AJAX запрос к серверу
+            console.log('Попытка входа:', { username, password });
+            
+            // Демонстрация успешного входа
+            alert('Добро пожаловать! Вход выполнен успешно.');
+            
+            // Закрываем модальное окно
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            loginModal.hide();
+            
+            // Очищаем форму
+            document.getElementById('loginForm').reset();
+        }
+
+        // ===== ФУНКЦИИ ФОРМЫ КОНСУЛЬТАЦИИ =====
+        
+        /**
+         * Обработка отправки заявки на консультацию
+         * Валидирует данные и показывает сообщение об успехе
+         */
+        function submitConsultation() {
+            const form = document.getElementById('consultationForm');
+            
+            // Получаем значения обязательных полей
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            // Проверяем заполненность обязательных полей
+            if (!firstName || !lastName || !email) {
+                alert('Пожалуйста, заполните все обязательные поля (отмеченные *)');
+                return;
+            }
+            
+            // Валидация email с помощью регулярного выражения
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Пожалуйста, введите корректный email адрес');
+                return;
+            }
+            
+            // Закрываем модальное окно консультации
+            const consultationModal = bootstrap.Modal.getInstance(document.getElementById('consultationModal'));
+            consultationModal.hide();
+            
+            // Показываем модальное окно с сообщением об успехе
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Очищаем форму
+            form.reset();
+            
+            // Логируем данные (в реальном приложении отправили бы на сервер)
+            console.log('Заявка на консультацию отправлена:', {
+                firstName,
+                lastName,
+                middleName: document.getElementById('middleName').value,
+                email,
+                phone: document.getElementById('phone').value,
+                interests: document.getElementById('interests').value,
+                message: document.getElementById('message').value
+            });
+        }
+
+        // ===== ОБРАБОТЧИКИ СОБЫТИЙ =====
+        
+        /**
+         * Плавная прокрутка для всех якорных ссылок
+         */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        /**
+         * Изменение фона навигации при прокрутке
+         */
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                // Делаем фон более непрозрачным при прокрутке
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                // Возвращаем исходную прозрачность
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // ===== АНИМАЦИИ =====
+        
+        /**
+         * Наблюдатель за пересечением элементов для анимаций
+         * Запускает анимации при попадании элементов в область просмотра
+         */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Применяем анимацию появления снизу
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        });
+
+        // Применяем наблюдатель к элементам, которые должны анимироваться
+        document.querySelectorAll('.stats-card, .course-card, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== ФОРМАТИРОВАНИЕ ПОЛЕЙ =====
+        
+        /**
+         * Автоматическое форматирование номера телефона в российском формате
+         */
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Удаляем все нецифровые символы
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            
+            if (value.length > 0) {
+                // Заменяем 8 на 7 в начале
+                if (value[0] === '8') value = '7' + value.slice(1);
+                
+                // Форматируем в российский формат
+                if (value[0] === '7') {
+                    formattedValue = '+7';
+                    if (value.length > 1) formattedValue += ' (' + value.slice(1, 4);
+                    if (value.length >= 4) formattedValue += ') ' + value.slice(4, 7);
+                    if (value.length >= 7) formattedValue += '-' + value.slice(7, 9);
+                    if (value.length >= 9) formattedValue += '-' + value.slice(9, 11);
+                }
+            }
+            
+            // Устанавливаем отформатированное значение
+            e.target.value = formattedValue;
+        });
+
+        /**
+         * Обработка нажатия Enter в форме входа
+         */
+        document.getElementById('loginForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performLogin();
+            }
+        });
+    </script>
+    
+    <!-- ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ АНИМАЦИЙ ===== -->
+    <style>
+        /* Анимация появления снизу */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;                    /* Начинаем с невидимого */
+                transform: translateY(30px);   /* И смещенного вниз */
+            }
+            to {
+                opacity: 1;                    /* Заканчиваем видимым */
+                transform: translateY(0);      /* И в исходной позиции */
+            }
+        }
+    </style>
+</body>
+</html>

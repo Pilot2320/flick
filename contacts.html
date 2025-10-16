@@ -1,56 +1,826 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    ... <!-- Скопируйте весь блок <head> из index.html -->
-    <title>Контакты — Название вашего сайта</title>
-    <meta name="description" content="Свяжитесь с нами: адрес, телефон, электронная почта и форма обратной связи">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - GrowthPath</title>
+    <!-- Подключение Bootstrap CSS для компонентов и сетки -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключение иконок Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Подключение современного шрифта Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== CSS ПЕРЕМЕННЫЕ ===== */
+        :root {
+            --primary-color: #6366F1;
+            --primary-light: #8B5CF6;
+            --secondary-color: #10B981;
+            --accent-color: #F59E0B;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border-color: #E5E7EB;
+            --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            --gradient-secondary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        
+        /* ===== ОБЩИЕ СТИЛИ ===== */
+        * {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        /* ===== СТИЛИ НАВИГАЦИИ ===== */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link-custom {
+            font-weight: 500;
+            color: var(--text-primary) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link-custom:hover, .nav-link-custom.active {
+            background: var(--bg-light);
+            color: var(--primary-color) !important;
+        }
+        
+        /* ===== СТИЛИ КНОПОК ===== */
+        .btn-primary-custom {
+            background: var(--gradient-primary);
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--gradient-primary);
+            border: none;
+        }
+        
+        /* ===== СТИЛИ ЗАГОЛОВКА СТРАНИЦЫ ===== */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* ===== СТИЛИ КАРТОЧЕК КОНТАКТОВ ===== */
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .contact-icon.secondary {
+            background: var(--gradient-secondary);
+        }
+        
+        .contact-icon.accent {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #EF4444 100%);
+        }
+        
+        .contact-card h5 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .contact-detail {
+            background: var(--bg-light);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+        
+        .contact-detail i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        /* ===== СТИЛИ ФОРМЫ ОБРАТНОЙ СВЯЗИ ===== */
+        .feedback-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-top: 3rem;
+        }
+        
+        .form-control-custom {
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            margin-bottom: 1rem;
+        }
+        
+        .form-control-custom:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+            outline: none;
+        }
+        
+        .form-label-custom {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== СТИЛИ КАРТЫ ===== */
+        .map-container {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-top: 3rem;
+        }
+        
+        .map-placeholder {
+            height: 400px;
+            background: var(--bg-light);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+        
+        /* ===== СТИЛИ ФУТЕРА ===== */
+        .footer-custom {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        /* ===== СТИЛИ МОДАЛЬНЫХ ОКОН ===== */
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            background: var(--gradient-secondary);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+            border: none;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+        
+        .btn-close:hover {
+            opacity: 1;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .modal-footer {
+            border: none;
+            padding: 0 2rem 2rem;
+        }
+        
+        /* ===== СТИЛИ ДЛЯ ПОЛЕЙ ВВОДА С ИКОНКАМИ ===== */
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group-custom i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            z-index: 5;
+        }
+        
+        .input-group-custom input {
+            padding-left: 3rem;
+        }
+        
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        ... <!-- Скопируйте весь блок <header> из index.html -->
-    </header>
-    <main>
-        <!-- Хлебные крошки -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>Контакты</span>
-        </nav>
+    <!-- ===== НАВИГАЦИОННАЯ ПАНЕЛЬ БЕЗ ВКЛАДКИ "МОЙ ПРОГРЕСС" ===== -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container">
+            <!-- Логотип и название сайта -->
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-graph-up-arrow me-2"></i>GrowthPath
+            </a>
+            
+            <!-- Кнопка для мобильного меню -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Содержимое навигационного меню БЕЗ "МОЙ ПРОГРЕСС" -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Основные ссылки навигации -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <!-- Переход на страницу курсов -->
+                        <a class="nav-link nav-link-custom" href="courses.html">Курсы</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Возврат к главной странице и прокрутка к разделу "О нас" -->
+                        <a class="nav-link nav-link-custom" href="index.html#about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Возврат к главной странице и прокрутка к отзывам -->
+                        <a class="nav-link nav-link-custom" href="index.html#testimonials">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Текущая страница - контакты -->
+                        <a class="nav-link nav-link-custom active" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+                
+                <!-- ТАКИЕ ЖЕ КНОПКИ КАК НА СТРАНИЦЕ КУРСОВ -->
+                <div class="d-flex gap-2">
+                    <!-- Кнопка открытия модального окна входа -->
+                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</button>
+                    <!-- Кнопка возврата на главную страницу -->
+                    <a href="index.html" class="btn btn-primary-custom btn-sm">Главная</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <h1>Контакты</h1>
+    <!-- ===== ЗАГОЛОВОК СТРАНИЦЫ ===== -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Свяжитесь с нами</h1>
+                    <p class="lead mb-0">Мы всегда готовы ответить на ваши вопросы и помочь в выборе подходящего курса</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-lg-end">
+                        <div class="badge bg-light text-dark fs-6 px-3 py-2">
+                            <i class="bi bi-clock me-2"></i>Отвечаем в течение 2 часов
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section>
-            <h2>Наш адрес</h2>
-            <p>123456, г. Москва, ул. Примерная, д. 1</p>
-        </section>
+    <!-- ===== ОСНОВНОЕ СОДЕРЖИМОЕ ===== -->
+    <div class="container">
+        <!-- ===== КАРТОЧКИ КОНТАКТОВ ===== -->
+        <div class="row g-4 mb-5">
+            <!-- Телефон -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card contact-card animate-on-scroll">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <h5>Телефон</h5>
+                    <p>Звоните в рабочие дни с 9:00 до 18:00</p>
+                    <div class="contact-detail">
+                        <i class="bi bi-telephone"></i>
+                        +7 (495) 123-45-67
+                    </div>
+                    <div class="contact-detail">
+                        <i class="bi bi-phone"></i>
+                        +7 (925) 987-65-43
+                    </div>
+                </div>
+            </div>
 
-        <section>
-            <h2>Телефон</h2>
-            <p>+7 (123) 456-78-90</p>
-        </section>
+            <!-- Email -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card contact-card animate-on-scroll">
+                    <div class="contact-icon secondary">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+                    <h5>Электронная почта</h5>
+                    <p>Отправьте нам сообщение, мы ответим в течение 2 часов</p>
+                    <div class="contact-detail">
+                        <i class="bi bi-envelope"></i>
+                        info@growthpath.ru
+                    </div>
+                    <div class="contact-detail">
+                        <i class="bi bi-person-lines-fill"></i>
+                        support@growthpath.ru
+                    </div>
+                </div>
+            </div>
 
-        <section>
-            <h2>Электронная почта</h2>
-            <p><a href="mailto:info@example.com">info@example.com</a></p>
-        </section>
+            <!-- Адрес -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card contact-card animate-on-scroll">
+                    <div class="contact-icon accent">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h5>Наш офис</h5>
+                    <p>Приходите к нам в офис для личной консультации</p>
+                    <div class="contact-detail">
+                        <i class="bi bi-geo-alt"></i>
+                        Москва, ул. Тверская, 1
+                    </div>
+                    <div class="contact-detail">
+                        <i class="bi bi-clock"></i>
+                        Пн-Пт: 9:00-18:00
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <section>
-            <h2>Форма обратной связи</h2>
-            <form action="#" method="post">
-                <label for="name">Ваше имя:</label><br>
-                <input type="text" id="name" name="name" required><br><br>
+        <!-- ===== ФОРМА ОБРАТНОЙ СВЯЗИ ===== -->
+        <div class="feedback-form animate-on-scroll">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Напишите нам</h3>
+                    <p class="text-muted mb-4">Заполните форму ниже, и мы свяжемся с вами в ближайшее время для ответа на все ваши вопросы.</p>
+                    
+                    <!-- Преимущества связи с нами -->
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="contact-icon" style="width: 50px; height: 50px; margin: 0; margin-right: 1rem;">
+                            <i class="bi bi-clock" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Быстрый ответ</h6>
+                            <small class="text-muted">Отвечаем в течение 2 часов</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="contact-icon secondary" style="width: 50px; height: 50px; margin: 0; margin-right: 1rem;">
+                            <i class="bi bi-people" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Персональный подход</h6>
+                            <small class="text-muted">Индивидуальные рекомендации</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="contact-icon accent" style="width: 50px; height: 50px; margin: 0; margin-right: 1rem;">
+                            <i class="bi bi-shield-check" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Конфиденциальность</h6>
+                            <small class="text-muted">Ваши данные под защитой</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <!-- Форма обратной связи -->
+                    <form id="contactForm">
+                        <div class="row g-3">
+                            <!-- Имя -->
+                            <div class="col-md-6">
+                                <label for="contactFirstName" class="form-label form-label-custom">Имя *</label>
+                                <input type="text" class="form-control form-control-custom" id="contactFirstName" name="firstName" required>
+                            </div>
+                            
+                            <!-- Фамилия -->
+                            <div class="col-md-6">
+                                <label for="contactLastName" class="form-label form-label-custom">Фамилия *</label>
+                                <input type="text" class="form-control form-control-custom" id="contactLastName" name="lastName" required>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label for="contactEmail" class="form-label form-label-custom">Электронная почта *</label>
+                                <input type="email" class="form-control form-control-custom" id="contactEmail" name="email" required>
+                            </div>
+                            
+                            <!-- Телефон -->
+                            <div class="col-12">
+                                <label for="contactPhone" class="form-label form-label-custom">Телефон</label>
+                                <input type="tel" class="form-control form-control-custom" id="contactPhone" name="phone" placeholder="+7 (___) ___-__-__">
+                            </div>
+                            
+                            <!-- Тема -->
+                            <div class="col-12">
+                                <label for="contactSubject" class="form-label form-label-custom">Тема обращения</label>
+                                <select class="form-control form-control-custom" id="contactSubject" name="subject">
+                                    <option value="">Выберите тему</option>
+                                    <option value="course-info">Информация о курсах</option>
+                                    <option value="enrollment">Запись на курс</option>
+                                    <option value="technical">Техническая поддержка</option>
+                                    <option value="partnership">Сотрудничество</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Сообщение -->
+                            <div class="col-12">
+                                <label for="contactMessage" class="form-label form-label-custom">Ваше сообщение *</label>
+                                <textarea class="form-control form-control-custom" id="contactMessage" name="message" rows="4" placeholder="Расскажите подробнее о вашем вопросе или пожелании" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Кнопка отправки -->
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary-custom w-100" onclick="submitContactForm()">
+                                <i class="bi bi-send me-2"></i>Отправить сообщение
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-                <label for="email">Ваш email:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
+        <!-- ===== КАРТА (БЕЗ БЛОКОВ ОНЛАЙН-ЧАТ И СОЦСЕТИ) ===== -->
+        <div class="map-container animate-on-scroll">
+            <h3 class="mb-4 text-center">Как нас найти</h3>
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <!-- Заглушка для карты -->
+                    <div class="map-placeholder">
+                        <div class="text-center">
+                            <i class="bi bi-geo-alt fs-1 mb-3"></i><br>
+                            <strong>Москва, ул. Тверская, 1</strong><br>
+                            <small class="text-muted">Здесь будет интерактивная карта</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="ps-lg-4">
+                        <h5 class="mb-3">Как добраться</h5>
+                        
+                        <div class="mb-3">
+                            <h6><i class="bi bi-train-front me-2"></i>На метро:</h6>
+                            <p class="text-muted mb-2">Станция "Охотный ряд" - 2 минуты пешком</p>
+                            <p class="text-muted mb-2">Станция "Театральная" - 5 минут пешком</p>
+                            <p class="text-muted">Станция "Площадь Революции" - 7 минут пешком</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6><i class="bi bi-car-front me-2"></i>На автомобиле:</h6>
+                            <p class="text-muted mb-2">Платная парковка рядом с офисом</p>
+                            <p class="text-muted">Время работы: 24/7</p>
+                        </div>
+                        
+                        <div>
+                            <h6><i class="bi bi-clock me-2"></i>Время работы:</h6>
+                            <p class="text-muted mb-1">Пн-Пт: 9:00 - 18:00</p>
+                            <p class="text-muted">Сб-Вс: выходной</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <label for="message">Сообщение:</label><br>
-                <textarea id="message" name="message" rows="5" required></textarea><br><br>
-
-                <button type="submit">Отправить</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        ... <!-- Скопируйте весь блок <footer> из index.html -->
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer-custom mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="mb-3"><i class="bi bi-graph-up-arrow me-2"></i>GrowthPath</h5>
+                    <p class="text-muted">Платформа для личностного роста и саморазвития. Помогаем людям раскрывать свой потенциал уже более 5 лет.</p>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="mb-3">Популярные курсы</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="footer-link">Эмоциональный интеллект</a></li>
+                                <li class="mb-2"><a href="#" class="footer-link">Лидерство</a></li>
+                                <li class="mb-2"><a href="#" class="footer-link">Тайм-менеджмент</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="mb-3">Поддержка</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="footer-link">Центр помощи</a></li>
+                                <li class="mb-2"><a href="contacts.html" class="footer-link">Связаться с нами</a></li>
+                                <li class="mb-2"><a href="#" class="footer-link">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="mb-3">Контакты</h6>
+                            <p class="footer-link mb-1"><i class="bi bi-envelope me-2"></i>info@growthpath.ru</p>
+                            <p class="footer-link mb-1"><i class="bi bi-telephone me-2"></i>+7 (495) 123-45-67</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ВХОДА В СИСТЕМУ ===== -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">
+                        <i class="bi bi-person-circle me-2"></i>Вход в аккаунт
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <p class="text-muted">Войдите в свой аккаунт, чтобы продолжить обучение</p>
+                    </div>
+                    
+                    <form id="loginForm">
+                        <div class="input-group-custom">
+                            <i class="bi bi-person-fill"></i>
+                            <input type="text" class="form-control form-control-custom" id="username" name="username" placeholder="Логин или email" required>
+                        </div>
+                        
+                        <div class="input-group-custom">
+                            <i class="bi bi-lock-fill"></i>
+                            <input type="password" class="form-control form-control-custom" id="password" name="password" placeholder="Пароль" required>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Запомнить меня
+                                </label>
+                            </div>
+                            <a href="#" class="text-decoration-none">Забыли пароль?</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="modal-footer">
+                    <div class="d-grid w-100 gap-2">
+                        <button type="button" class="btn btn-primary-custom" onclick="performLogin()">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        </button>
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Нет аккаунта? <a href="#" class="text-decoration-none">Зарегистрироваться</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО УСПЕХА ===== -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h4 class="mb-3">Сообщение отправлено!</h4>
+                    <p class="text-muted mb-4">
+                        Спасибо за ваше обращение!<br>
+                        Мы получили ваше сообщение и свяжемся с вами в течение 2 часов.
+                        <br><br>
+                        Ответ будет отправлен на указанную вами электронную почту.
+                    </p>
+                    
+                    <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Понятно</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ПОДКЛЮЧЕНИЕ JAVASCRIPT БИБЛИОТЕК ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- ===== ПОЛЬЗОВАТЕЛЬСКИЕ JAVASCRIPT ФУНКЦИИ ===== -->
+    <script>
+        // ===== ФУНКЦИИ АУТЕНТИФИКАЦИИ =====
+        
+        /**
+         * Функция обработки входа пользователя в систему
+         */
+        function performLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!username || !password) {
+                alert('Пожалуйста, введите логин и пароль');
+                return;
+            }
+            
+            console.log('Попытка входа:', { username, password });
+            alert('Добро пожаловать! Вход выполнен успешно.');
+            
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            loginModal.hide();
+            
+            document.getElementById('loginForm').reset();
+        }
+
+        // ===== ФУНКЦИИ ФОРМЫ ОБРАТНОЙ СВЯЗИ =====
+        
+        /**
+         * Обработка отправки формы обратной связи
+         */
+        function submitContactForm() {
+            const form = document.getElementById('contactForm');
+            
+            // Получаем значения обязательных полей
+            const firstName = document.getElementById('contactFirstName').value.trim();
+            const lastName = document.getElementById('contactLastName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+            
+            // Проверяем заполненность обязательных полей
+            if (!firstName || !lastName || !email || !message) {
+                alert('Пожалуйста, заполните все обязательные поля (отмеченные *)');
+                return;
+            }
+            
+            // Валидация email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Пожалуйста, введите корректный email адрес');
+                return;
+            }
+            
+            // Показываем модальное окно с сообщением об успехе
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Очищаем форму
+            form.reset();
+            
+            // Логируем данные (в реальном приложении отправили бы на сервер)
+            console.log('Сообщение отправлено:', {
+                firstName,
+                lastName,
+                email,
+                phone: document.getElementById('contactPhone').value,
+                subject: document.getElementById('contactSubject').value,
+                message
+            });
+        }
+
+        // ===== ФОРМАТИРОВАНИЕ ТЕЛЕФОНА =====
+        
+        /**
+         * Автоматическое форматирование номера телефона в российском формате
+         */
+        document.getElementById('contactPhone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            
+            if (value.length > 0) {
+                if (value[0] === '8') value = '7' + value.slice(1);
+                
+                if (value[0] === '7') {
+                    formattedValue = '+7';
+                    if (value.length > 1) formattedValue += ' (' + value.slice(1, 4);
+                    if (value.length >= 4) formattedValue += ') ' + value.slice(4, 7);
+                    if (value.length >= 7) formattedValue += '-' + value.slice(7, 9);
+                    if (value.length >= 9) formattedValue += '-' + value.slice(9, 11);
+                }
+            }
+            
+            e.target.value = formattedValue;
+        });
+
+        // ===== ОБРАБОТЧИКИ КЛАВИАТУРЫ =====
+        
+        /**
+         * Обработка нажатия клавиши Enter в форме входа
+         */
+        document.getElementById('loginForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performLogin();
+            }
+        });
+
+        /**
+         * Обработка нажатия клавиши Enter в форме обратной связи
+         */
+        document.getElementById('contactForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                submitContactForm();
+            }
+        });
+
+        // ===== АНИМАЦИИ ПРИ ПРОКРУТКЕ =====
+        
+        /**
+         * Наблюдатель за появлением элементов при прокрутке
+         */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Применяем наблюдатель к элементам с анимацией
+        document.querySelectorAll('.contact-card, .feedback-form, .map-container').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
