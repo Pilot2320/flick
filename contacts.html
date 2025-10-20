@@ -16,6 +16,8 @@
         :root {
             --primary-color: #6366F1;
             --primary-light: #8B5CF6;
+            --growthpath-text: #ffffff;
+            --growthpath-muted: #a0a0b0;
             --secondary-color: #10B981;
             --accent-color: #F59E0B;
             --bg-light: #F8FAFC;
@@ -33,6 +35,14 @@
         /* ===== ОБЩИЕ СТИЛИ ===== */
         * {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .growthpath-section h5 {
+            color: var(--growthpath-text);
+        }
+
+        .growthpath-section .text-muted {
+            color: var(--growthpath-muted) !important;
         }
         
         body {
@@ -576,7 +586,7 @@
     <footer class="footer-custom mt-5">
         <div class="container">
             <div class="row g-4">
-                <div class="col-lg-4">
+                <div class="col-lg-4 growthpath-section">
                     <h5 class="mb-3"><i class="bi bi-graph-up-arrow me-2"></i>GrowthPath</h5>
                     <p class="text-muted">Платформа для личностного роста и саморазвития. Помогаем людям раскрывать свой потенциал уже более 5 лет.</p>
                 </div>
@@ -704,7 +714,7 @@
                 return;
             }
             
-            console.log('Попытка входа:', { username, password });
+            // Имитация отправки формы
             alert('Добро пожаловать! Вход выполнен успешно.');
             
             const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
@@ -719,43 +729,28 @@
          * Обработка отправки формы обратной связи
          */
         function submitContactForm() {
-            const form = document.getElementById('contactForm');
-            
-            // Получаем значения обязательных полей
-            const firstName = document.getElementById('contactFirstName').value.trim();
-            const lastName = document.getElementById('contactLastName').value.trim();
+            // Базовая валидация формы
+            const name = document.getElementById('contactName').value.trim();
             const email = document.getElementById('contactEmail').value.trim();
             const message = document.getElementById('contactMessage').value.trim();
-            
-            // Проверяем заполненность обязательных полей
-            if (!firstName || !lastName || !email || !message) {
-                alert('Пожалуйста, заполните все обязательные поля (отмеченные *)');
+
+            if (!name || !email || !message) {
+                alert('Пожалуйста, заполните все обязательные поля');
                 return;
             }
-            
-            // Валидация email
+
+            // Простая проверка email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert('Пожалуйста, введите корректный email адрес');
+                alert('Пожалуйста, введите корректный email');
                 return;
             }
-            
-            // Показываем модальное окно с сообщением об успехе
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-            
-            // Очищаем форму
-            form.reset();
-            
-            // Логируем данные (в реальном приложении отправили бы на сервер)
-            console.log('Сообщение отправлено:', {
-                firstName,
-                lastName,
-                email,
-                phone: document.getElementById('contactPhone').value,
-                subject: document.getElementById('contactSubject').value,
-                message
-            });
+
+            // Имитация отправки формы
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+
+            // Очистка формы
+            document.getElementById('contactForm').reset();
         }
 
         // ===== ФОРМАТИРОВАНИЕ ТЕЛЕФОНА =====

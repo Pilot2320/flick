@@ -17,6 +17,8 @@
         :root {
             /* Основные цвета */
             --primary-color: #6366F1;      /* Основной цвет - индиго */
+            --growthpath-text: #ffffff;
+            --growthpath-muted: #a0a0b0;
             --primary-light: #8B5CF6;      /* Светлый вариант основного */
             --secondary-color: #10B981;    /* Вторичный цвет - зеленый */
             --accent-color: #F59E0B;       /* Акцентный цвет - янтарный */
@@ -38,6 +40,14 @@
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .growthpath-section h5 {
+            color: var(--growthpath-text);
+        }
+
+        .growthpath-section .text-muted {
+            color: var(--growthpath-muted) !important;
         }
         
         /* ===== ОБЩИЕ СТИЛИ ===== */
@@ -857,7 +867,7 @@
         <div class="container">
             <div class="row g-4">
                 <!-- Информация о компании -->
-                <div class="col-lg-4">
+                <div class="col-lg-4 growthpath-section">
                     <h5 class="mb-3"><i class="bi bi-graph-up-arrow me-2"></i>GrowthPath</h5>
                     <p class="text-muted">Платформа для личностного роста и саморазвития. Помогаем людям раскрывать свой потенциал уже более 5 лет.</p>
                     
@@ -908,7 +918,7 @@
             
             <!-- Копирайт и дополнительные ссылки -->
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6 growthpath-section">
                     <p class="mb-0 text-muted">&copy; 2025 GrowthPath. Все права защищены.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
@@ -1133,9 +1143,6 @@
                 return;
             }
             
-            // Здесь в реальном приложении был бы AJAX запрос к серверу
-            console.log('Попытка входа:', { username, password });
-            
             // Демонстрация успешного входа
             alert('Добро пожаловать! Вход выполнен успешно.');
             
@@ -1184,17 +1191,8 @@
             
             // Очищаем форму
             form.reset();
-            
-            // Логируем данные (в реальном приложении отправили бы на сервер)
-            console.log('Заявка на консультацию отправлена:', {
-                firstName,
-                lastName,
-                middleName: document.getElementById('middleName').value,
-                email,
-                phone: document.getElementById('phone').value,
-                interests: document.getElementById('interests').value,
-                message: document.getElementById('message').value
-            });
+
+
         }
 
         // ===== ОБРАБОТЧИКИ СОБЫТИЙ =====
