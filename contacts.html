@@ -41,7 +41,6 @@
             margin: 0;
             padding: 0;
         }
-
         .skip-link {
             position: absolute;
             top: -40px;
@@ -51,8 +50,10 @@
             padding: var(--space-sm);
             text-decoration: none;
             z-index: 100;
+            transition: top 0.3s ease;
         }
 
+        .skip-link:hover,
         .skip-link:focus {
             top: 0;
         }
@@ -482,7 +483,7 @@
                 <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время для ответа на все ваши вопросы.</p>
                 
                 <div class="success-message" id="successMessage" role="alert">
-                    ✅ Ваше сообщение отправлено успешно! Мы свяжемся с вами в ближайшее время.
+                    Ваше сообщение отправлено успешно! Мы свяжемся с вами в ближайшее время.
                 </div>
 
                 <form id="contactForm" novalidate aria-label="Форма связи">

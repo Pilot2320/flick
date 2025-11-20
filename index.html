@@ -50,8 +50,10 @@
             padding: var(--space-sm);
             text-decoration: none;
             z-index: 100;
+            transition: top 0.3s ease;
         }
 
+        .skip-link:hover,
         .skip-link:focus {
             top: 0;
         }
@@ -87,11 +89,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: var(--space-md);
+            gap: clamp(0.5rem, 2vw, 2rem);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
             font-weight: 700;
             color: var(--color-primary);
             text-decoration: none;
@@ -100,9 +102,10 @@
         .nav-links {
             list-style: none;
             display: flex;
-            gap: var(--space-md);
+            gap: clamp(0.5rem, 2vw, 1.5rem);
             margin: 0;
             padding: 0;
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         .nav-links a {
@@ -131,7 +134,7 @@
         .hero {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: white;
-            padding: var(--space-2xl) var(--space-md);
+            padding: clamp(2rem, 8vw, 4rem) var(--space-md);
             text-align: center;
         }
 
@@ -141,13 +144,13 @@
         }
 
         .hero h1 {
-            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-size: clamp(1.5rem, 6vw, 3rem);
             margin: 0 0 var(--space-md) 0;
             line-height: 1.3;
         }
 
         .hero p {
-            font-size: 1.125rem;
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
             margin: 0 0 var(--space-lg) 0;
             opacity: 0.95;
         }
@@ -163,6 +166,7 @@
             border: 2px solid white;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         .cta-button:hover {
@@ -178,21 +182,21 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--space-md);
+            padding: 0 clamp(1rem, 5vw, 2rem);
         }
 
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-            padding: var(--space-2xl) var(--space-md);
+            gap: clamp(1rem, 3vw, 2rem);
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
         }
 
         .course-card {
             background: var(--color-bg);
             border: 1px solid var(--color-border);
             border-radius: 8px;
-            padding: var(--space-lg);
+            padding: clamp(1rem, 3vw, 2rem);
             transition: all 0.3s ease;
         }
 
@@ -208,27 +212,33 @@
         .course-card h3 {
             margin-top: 0;
             color: var(--color-primary);
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
         }
 
         .course-card p {
             color: var(--color-text-light);
             margin-bottom: var(--space-md);
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         .about-section {
-            padding: var(--space-2xl) var(--space-md);
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
             background: var(--color-bg-light);
+        }
+
+        .about-section h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-lg);
+            gap: clamp(1rem, 3vw, 2rem);
+            margin-top: clamp(1rem, 3vw, 2rem);
         }
 
         .about-card {
-            padding: var(--space-lg);
+            padding: clamp(1rem, 3vw, 2rem);
             background: white;
             border-radius: 8px;
             border-left: 4px solid var(--color-primary);
@@ -237,22 +247,27 @@
         .about-card h4 {
             margin-top: 0;
             color: var(--color-primary);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
         }
 
         .testimonials {
-            padding: var(--space-2xl) var(--space-md);
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
+        }
+
+        .testimonials h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
 
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-lg);
+            gap: clamp(1rem, 3vw, 2rem);
+            margin-top: clamp(1rem, 3vw, 2rem);
         }
 
         .testimonial-card {
             background: var(--color-bg-light);
-            padding: var(--space-lg);
+            padding: clamp(1rem, 3vw, 2rem);
             border-radius: 8px;
             border-left: 4px solid var(--color-primary);
         }
@@ -261,30 +276,33 @@
             margin: 0 0 var(--space-sm) 0;
             font-style: italic;
             color: var(--color-text-light);
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         .testimonial-card .author {
             font-weight: 600;
             color: var(--color-primary);
             margin: 0;
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         footer {
             background: #000;
             color: #000;
-            padding: var(--space-2xl) var(--space-md);
-            margin-top: var(--space-2xl);
-            padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
+            margin-top: clamp(2rem, 8vw, 4rem);
+            padding-bottom: max(clamp(1rem, 3vw, 2rem), env(safe-area-inset-bottom));
         }
 
         footer .container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
+            gap: clamp(1rem, 3vw, 2rem);
         }
 
         footer h4 {
             margin-top: 0;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
         }
 
         footer a {
@@ -292,6 +310,7 @@
             text-decoration: none;
             display: block;
             margin-bottom: var(--space-xs);
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         footer a:hover {

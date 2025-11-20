@@ -49,8 +49,10 @@
             padding: var(--space-sm);
             text-decoration: none;
             z-index: 100;
+            transition: top 0.3s ease;
         }
 
+        .skip-link:hover,
         .skip-link:focus {
             top: 0;
         }
@@ -82,11 +84,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: var(--space-md);
+            gap: clamp(0.5rem, 2vw, 2rem);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
             font-weight: 700;
             color: var(--color-primary);
             text-decoration: none;
@@ -95,9 +97,10 @@
         .nav-links {
             list-style: none;
             display: flex;
-            gap: var(--space-md);
+            gap: clamp(0.5rem, 2vw, 1.5rem);
             margin: 0;
             padding: 0;
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         .nav-links a {
@@ -126,30 +129,34 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--space-md);
+            padding: 0 clamp(1rem, 5vw, 2rem);
         }
 
         .page-header {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: white;
-            padding: var(--space-2xl) var(--space-md);
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
             text-align: center;
-            margin-bottom: var(--space-2xl);
+            margin-bottom: clamp(1.5rem, 5vw, 3rem);
         }
 
         .page-header h1 {
             margin: 0;
-            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+        }
+
+        .page-header p {
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
         }
 
         .courses-section {
-            padding: 0 var(--space-md) var(--space-2xl);
+            padding: 0 clamp(1rem, 5vw, 2rem) clamp(2rem, 8vw, 4rem);
         }
 
         .courses-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
         }
 
         .instructor-card {
@@ -176,23 +183,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .instructor-content {
-            padding: var(--space-lg);
+            padding: clamp(1rem, 3vw, 2rem);
         }
 
         .instructor-content h3 {
             margin: 0 0 var(--space-sm) 0;
             color: var(--color-primary);
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
         }
 
         .instructor-content p {
-            margin: 0 0 var(--space-md) 0;
+            margin: 0 0 clamp(0.75rem, 2vw, 1rem) 0;
             color: var(--color-text-light);
-            font-size: 0.95rem;
+            font-size: clamp(0.875rem, 1.5vw, 0.95rem);
             line-height: 1.6;
         }
 
@@ -200,14 +214,14 @@
             display: inline-block;
             background: var(--color-primary);
             color: white;
-            padding: var(--space-xs) var(--space-md);
+            padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             border: 2px solid transparent;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
         }
 
         .course-button:hover {
@@ -222,19 +236,20 @@
         footer {
             background: #000;
             color: #000;
-            padding: var(--space-2xl) var(--space-md);
-            margin-top: var(--space-2xl);
-            padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
+            margin-top: clamp(2rem, 8vw, 4rem);
+            padding-bottom: max(clamp(1rem, 3vw, 2rem), env(safe-area-inset-bottom));
         }
 
         footer .container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
+            gap: clamp(1rem, 3vw, 2rem);
         }
 
         footer h4 {
             margin-top: 0;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
         }
 
         footer a {
@@ -242,6 +257,7 @@
             text-decoration: none;
             display: block;
             margin-bottom: var(--space-xs);
+            font-size: clamp(0.875rem, 2vw, 1rem);
         }
 
         footer a:hover {
@@ -263,7 +279,7 @@
             }
 
             .page-header {
-                padding: var(--space-xl) var(--space-md);
+                padding: clamp(1.5rem, 5vw, 2rem);
             }
 
             .page-header h1 {
@@ -333,7 +349,9 @@
             <div class="container">
                 <div class="courses-container">
                     <article class="instructor-card" id="emotional-intelligence">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Эмоциональный интеллект" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Эмоциональный интеллект</h3>
                             <p><strong>Преподаватель: Анна Петрова</strong></p>
@@ -343,7 +361,9 @@
                     </article>
 
                     <article class="instructor-card" id="leadership">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Лидерство и управление" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Лидерство и управление</h3>
                             <p><strong>Преподаватель: Михаил Сидоров</strong></p>
@@ -353,7 +373,9 @@
                     </article>
 
                     <article class="instructor-card" id="productivity">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Продуктивность и планирование" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Продуктивность и планирование</h3>
                             <p><strong>Преподаватель: Елена Кузнецова</strong></p>
@@ -363,7 +385,9 @@
                     </article>
 
                     <article class="instructor-card">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Деловая коммуникация" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Деловая коммуникация</h3>
                             <p><strong>Преподаватель: Дмитрий Волков</strong></p>
@@ -373,7 +397,9 @@
                     </article>
 
                     <article class="instructor-card">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Управление стрессом" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Управление стрессом</h3>
                             <p><strong>Преподаватель: Ольга Романова</strong></p>
@@ -383,7 +409,9 @@
                     </article>
 
                     <article class="instructor-card">
-                        <div class="instructor-image" aria-hidden="true">👤</div>
+                        <div class="instructor-image">
+                            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f2c5575b-3b2d-48e4-aea2-e6640c4f64dc" alt="Саморазвитие и уверенность" loading="lazy">
+                        </div>
                         <div class="instructor-content">
                             <h3>Саморазвитие и уверенность</h3>
                             <p><strong>Преподаватель: Александр Смирнов</strong></p>
